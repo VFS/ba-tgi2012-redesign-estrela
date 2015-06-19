@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>DetetiveApp v0.2&alpha;</title>
+        <link rel="stylesheet" href="themes/css/jqtouch.css" title="jQTouch">
+        <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+
+        <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Uncomment the following two lines (and comment out the previous two) to use jQuery instead of Zepto. -->
+        <!-- <script src="../../src/lib/jquery-1.7.min.js" type="application/x-javascript" charset="utf-8"></script> -->
+        <!-- <script src="../../src/jqtouch-jquery.min.js" type="application/x-javascript" charset="utf-8"></script> -->
+        <script src="../../extensions/jqt.themeswitcher.min.js" type="application/x-javascript" charset="utf-8"></script>
+
+
+<!-- Script Victor showdiv -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.box').hide();
+                $('#dropdown').change(function() {
+                    $('.box').hide();
+                    $('#div' + $(this).val()).show();
+                });
+            });
+        </script>
+
+
+
+        <script type="text/javascript" charset="utf-8">
+            var jQT = new $.jQTouch({
+                icon: 'jqtouch.png',
+                icon4: 'jqtouch4.png',
+                addGlossToIcon: false,
+                startupScreen: 'jqt_startup.png',
+                statusBar: 'black-translucent',
+                themeSelectionSelector: '#jqt #themes ul',
+                preloadImages: []
+            });
+
+            // Some sample Javascript functions:
+            $(function(){
+
+
+
+                // Page animation callback events
+                $('#pageevents').
+                    bind('pageAnimationStart', function(e, info){ 
+                        $(this).find('.info').append('Started animating ' + info.direction + '&hellip;  And the link ' +
+                            'had this custom data: ' + $(this).data('referrer').data('custom') + '<br>');
+                    }).
+                    bind('pageAnimationEnd', function(e, info){
+                        $(this).find('.info').append('Finished animating ' + info.direction + '.<br><br>');
+
+                    });
+                
+                // Page animations end with AJAX callback event, example 1 (load remote HTML only first time)
+                $('#callback').bind('pageAnimationEnd', function(e, info){
+                    // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
+                    if (!$(this).data('loaded')) {
+                        // Append a placeholder in case the remote HTML takes its sweet time making it back
+                        // Then, overwrite the "Loading" placeholder text with the remote HTML
+                        $(this).append($('<div>Loading</div>').load('ajax.html .info', function() {        
+                            // Set the 'loaded' var to true so we know not to reload
+                            // the HTML next time the #callback div animation ends
+                            $(this).parent().data('loaded', true);  
+                        }));
+                    }
+                });
+                // Orientation callback event
+                $('#jqt').bind('turn', function(e, data){
+                    $('#orient').html('Orientation: ' + data.orientation);
+                });
+                
+            });
+        </script>
+        <style type="text/css" media="screen">
+            #jqt.fullscreen #home .info {
+                display: none;
+            }
+            div#jqt #about {
+                padding: 100px 10px 40px;
+                text-shadow: rgba(0, 0, 0, 0.3) 0px -1px 0;
+                color: #999;
+                font-size: 13px;
+                text-align: center;
+                background: #161618;
+            }
+            div#jqt #about p {
+                margin-bottom: 8px;
+            }
+            div#jqt #about a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            div#jqt *  {font-family: 'Crete Round', serif;; font-weight:normal;}
+        </style>
+    </head>
+    <body>
+        <div id="jqt">
+            <div id="about" class="selectable">
+                <p><img src="jqtouch.png" /></p>
+                <p><strong>DetetiveAPP v0.2&alpha;</strong><br>
+                <p>Centro Universitário Belas Artes<br>de São Paulo<br>TGI <em>Design Gráfico</em><br>2012</p>
+                <br><small>
+                <p>Arthur Sanches<br>Larissa Manssour<br>Rubens Angulo<br><a target="_blank" href="http://taisfmarinho.com">Tais Marinho</a><br><a target="_blank" href="http://Victor.SO">Victor.SO</a></small></p>
+                <br>
+                <p><a target="_blank" href="http://jqtouch.com/">jQTouch</a> | <a target="_blank" href="http://phonegap.com/">PhoneGap</a></p>
+                <p><br><br><a href="#" class="grayButton goback">Fechar</a></p>
+            </div>
+
+            <div id="home" class="current">
+                <div class="toolbar">
+                    <h1>Detetive APP</h1>
+                    <a class="button slideup" id="infoButton" href="#about">Sobre</a>
+                </div>
+                <div class="scroll">
+                
+                <h2>Escolha sua versão</h2>
+                    <ul class="rounded">
+                        <li class="arrow"><a href="#classico">Detetive 80's <small class="counter"> 6 </small></a> </li>
+                        <li class="arrow"><a href="#remake">Detetive "Verde" 2000 <small class="counter"> 8 </small></a> </li>
+                        <li class="arrow"><a href="#remake">Detetive para Viagem <small class="counter"> 8 </small></a> </li>
+                        <li class="arrow"><a href="#remake">Detetive 3D <small class="counter"> 8 </small></a> </li>
+                        <li class="arrow"><a href="#addams">Família Addams <small class="counter">6 </small></a></li>
+                        <li class="arrow"><a href="#classico">Turma da Mônica <small class="counter">6 </small></a></li>
+                        <li class="arrow"><a href="#classico">Bob Esponja <small class="counter">6 </small></a></li>
+                    </ul>
+
+                <h2>Baixe o aplicativo</h2>
+                    <ul class="rounded">
+                        <li class="forward"><a target="_blank" href="http://phonegap.com/">iOS</a></li>
+                        <li class="forward"><a target="_blank" href="http://phonegap.com">Android</a></li>
+                        <li class="forward"><a target="_blank" href="http://phonegap.com">Windows</a></li>
+                    </ul>
+
+                    <ul class="individual">
+                        <li><a target="_blank" href="http://estrela.com.br">Estrela</a></li>
+                        <li><a target="_blank" href="http://tgi.victor.so">TGI 2012</a></li>
+                    </ul>
+
+                    <div class="info"><p>Adicione esta página à sua home ou instale o aplicativo.</p></div>
+                </div>
+            </div>
+            <div id="pageevents">
+                <div class="toolbar">
+                    <h1>Page Events</h1>
+                    <a class="back" href="#">Events</a>
+                </div>
+                <div class="info scroll" style="font-weight: normal;">
+                </div>
+            </div>
+
+
+
+<!--
+========================================================================================================================================================>
+-->
+
+<div id="classico">
+    <div class="toolbar">
+        <h1>Detetive 80's</h1><a class="back" href="#">Voltar</a>
+    </div>
+    <div class="scroll">
+        <h2>Suspeito</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="classico" value="branca" title="Dona Branca" /></li>
+            <li><input type="checkbox" name="classico" value="marinho" title="Sr. Marinho" /></li>
+            <li><input type="checkbox" name="classico" value="violeta" title="Srta. Violeta" /></li>
+            <li><input type="checkbox" name="classico" value="rosa" title="Srta. Rosa" /></li>
+            <li><input type="checkbox" name="classico" value="mostarda" title="Col. Mostarda" /></li>
+            <li><input type="checkbox" name="classico" value="black" title="Prof. Black" /></li>
+        </ul>
+        <h2>Arma</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="classico" value="revolver" title="Revólver" /></li>
+            <li><input type="checkbox" name="classico" value="candelabro" title="Candelabro" /></li>
+            <li><input type="checkbox" name="classico" value="corda" title="Corda" /></li>
+            <li><input type="checkbox" name="classico" value="punhal" title="Punhal" /></li>
+            <li><input type="checkbox" name="classico" value="chave" title="Chave Inglesa" /></li>
+            <li><input type="checkbox" name="classico" value="cano" title="Cano" /></li>
+        </ul>
+        <h2>Lugar</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="classico" value="hall" title="Hall" /></li>
+            <li><input type="checkbox" name="classico" value="musica" title="Salão de Música" /></li>
+            <li><input type="checkbox" name="classico" value="jogos" title="Salão de Jogos" /></li>
+            <li><input type="checkbox" name="classico" value="biblioteca" title="Biblioteca" /></li>
+            <li><input type="checkbox" name="classico" value="escritorio" title="Escritório" /></li>
+            <li><input type="checkbox" name="classico" value="jantar" title="Sala de Jantar" /></li>
+            <li><input type="checkbox" name="classico" value="cozinha" title="Cozinha" /></li>
+            <li><input type="checkbox" name="classico" value="festas" title="Salão de Festas" /></li>
+            <li><input type="checkbox" name="classico" value="estar" title="Sala de Estar" /></li>
+        </ul>
+    </div>
+</div>
+<!--
+========================================================================================================================================================>
+-->
+<div id="remake">
+    <div class="toolbar">
+        <h1>Detetive 80's</h1><a class="back" href="#">Voltar</a>
+    </div>
+    <div class="scroll">
+        <h2>Suspeito</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="remake" value="branca" title="Dona Branca" /></li>
+            <li><input type="checkbox" name="remake" value="marinho" title="Sr. Marinho" /></li>
+            <li><input type="checkbox" name="remake" value="violeta" title="Dona Violeta" /></li>
+            <li><input type="checkbox" name="remake" value="rosa" title="Srta. Rosa" /></li>
+            <li><input type="checkbox" name="remake" value="mordomo" title="Mordomo James" /></li>
+            <li><input type="checkbox" name="remake" value="gourmet" title="Tony Gourmet" /></li>
+            <li><input type="checkbox" name="remake" value="soturno" title="Sérgio Soturno" /></li>
+            <li><input type="checkbox" name="remake" value="bigode" title="Sargento Bigode" /></li>
+        </ul>
+        <h2>Arma</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="remake" value="quimica" title="Arma Química" /></li>
+            <li><input type="checkbox" name="remake" value="espingarda" title="Espingarda" /></li>
+            <li><input type="checkbox" name="remake" value="pa" title="Pá" /></li>
+            <li><input type="checkbox" name="remake" value="faca" title="Faca" /></li>
+            <li><input type="checkbox" name="remake" value="veneno" title="Veneno" /></li>
+            <li><input type="checkbox" name="remake" value="cabra" title="Pé-de-Cabra" /></li>
+            <li><input type="checkbox" name="remake" value="soco" title="Soco Inglês" /></li>
+            <li><input type="checkbox" name="remake" value="tesoura" title="Tesoura" /></li>
+        </ul>
+        <h2>Lugar</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="remake" value="tortura" title="Sala de Tortura" /></li>
+            <li><input type="checkbox" name="remake" value="estufa" title="Estufa de Plantas" /></li>
+            <li><input type="checkbox" name="remake" value="brinquedos" title="Sala de Brinquedos" /></li>
+            <li><input type="checkbox" name="remake" value="pantano" title="Pântano" /></li>
+            <li><input type="checkbox" name="remake" value="laboratorio" title="Laboratório" /></li>
+            <li><input type="checkbox" name="remake" value="jantar" title="Sala de Jantar" /></li>
+            <li><input type="checkbox" name="remake" value="cozinha" title="Cozinha" /></li>
+            <li><input type="checkbox" name="remake" value="escritorio" title="Escritório" /></li>
+            <li><input type="checkbox" name="remake" value="cemiterio" title="Cemitério" /></li>
+        </ul>
+    </div>
+</div>
+<!--
+========================================================================================================================================================>
+-->
+<div id="addams">
+    <div class="toolbar">
+        <h1>Detetive 80's</h1><a class="back" href="#">Voltar</a>
+    </div>
+    <div class="scroll">
+        <h2>Suspeito</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="addams" value="morticia" title="Mortícia Addams" /></li>
+            <li><input type="checkbox" name="addams" value="gomez" title="Gomez Addams" /></li>
+            <li><input type="checkbox" name="addams" value="feioso" title="Feioso" /></li>
+            <li><input type="checkbox" name="addams" value="vandinha" title="Vandinha" /></li>
+            <li><input type="checkbox" name="addams" value="chico" title="Tio Chico" /></li>
+            <li><input type="checkbox" name="addams" value="tropeco" title="Tropeço" /></li>
+        </ul>
+        <h2>Arma</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="addams" value="guilhotina" title="Guilhotina" /></li>
+            <li><input type="checkbox" name="addams" value="planta" title="Planta Carnívora" /></li>
+            <li><input type="checkbox" name="addams" value="trem" title="Trilho de Trem" /></li>
+            <li><input type="checkbox" name="addams" value="cadeira" title="Cadeira Elétrica" /></li>
+            <li><input type="checkbox" name="addams" value="crocodilo" title="Crocodilo" /></li>
+            <li><input type="checkbox" name="addams" value="serra" title="Serra" /></li>
+        </ul>
+        <h2>Lugar</h2>
+        <ul class="rounded">
+            <li><input type="checkbox" name="addams" value="tortura" title="Sala de Tortura" /></li>
+            <li><input type="checkbox" name="addams" value="estufa" title="Estufa de Plantas" /></li>
+            <li><input type="checkbox" name="addams" value="brinquedos" title="Sala de Brinquedos" /></li>
+            <li><input type="checkbox" name="addams" value="pantano" title="Pântano" /></li>
+            <li><input type="checkbox" name="addams" value="laboratorio" title="Laboratório" /></li>
+            <li><input type="checkbox" name="addams" value="jantar" title="Sala de Jantar" /></li>
+            <li><input type="checkbox" name="addams" value="cozinha" title="Cozinha" /></li>
+            <li><input type="checkbox" name="addams" value="escritorio" title="Escritório" /></li>
+            <li><input type="checkbox" name="addams" value="cemiterio" title="Cemitério" /></li>
+        </ul>
+    </div>
+</div>
+<!--
+========================================================================================================================================================>
+-->
+        </div>
+    </body>
+</html>
